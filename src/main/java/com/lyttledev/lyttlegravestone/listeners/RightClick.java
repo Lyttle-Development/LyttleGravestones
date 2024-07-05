@@ -4,6 +4,7 @@ import com.lyttledev.lyttlegravestone.LyttleGravestone;
 import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.utils.ItemSerializer;
 import com.lyttledev.lyttlegravestone.utils.Memory;
+import com.lyttledev.lyttlegravestone.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -52,7 +53,7 @@ public class RightClick implements Listener {
 
             // Permission logic
             if (player != graveOwnerPlayer && !player.hasPermission("MapleGrave.Staff")) {
-                player.sendMessage("This is the resting place of " + graveOwnerName + ", and you do not have permission to access it!\nMessage a staff member if you like it to be removed.");
+                Message.sendMessageRaw(player, "This is the resting place of " + graveOwnerName + ", and you do not have permission to access it!\nMessage a staff member if you like it to be removed.");
                 return;
             }
 
