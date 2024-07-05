@@ -4,6 +4,7 @@ import com.lyttledev.lyttlegravestone.LyttleGravestone;
 import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.utils.ItemSerializer;
 import com.lyttledev.lyttlegravestone.utils.Memory;
+import com.lyttledev.lyttlegravestone.utils.Message;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -81,7 +82,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             try {
                 String confirmArg = context.getArgument("confirm", String.class);
                 confirm = confirmArg.equals("confirm");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException ignored) { }
 
             // Retrieve gravestone at x, y, z
             Location gravestoneLocation = new Location(Bukkit.getWorld(world), Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z));
@@ -94,7 +95,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             }
 
             if (values == null) {
-                player.sendMessage("No gravestone found at " + x + " " + y + " " + z);
+                Message.sendMessage(player, "No gravestone found at " + x + " " + y + " " + z);
                 return 0;
             }
 
@@ -104,7 +105,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
 
             // Permission logic
             if (player != graveOwnerPlayer && !player.hasPermission("MapleGrave.Staff")) {
-                player.sendMessage("You do not have permission to retrieve this gravestone.");
+                Message.sendMessage(player, "You do not have permission to retrieve this gravestone.");
                 return 0;
             }
 
@@ -119,7 +120,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
 
             // Check if the player has enough money
             if (economy != null && economy.getBalance(player) < cost || economy == null) {
-                player.sendMessage("You do not have enough money to retrieve this gravestone. Cost: " + cost);
+                Message.sendMessage(player, "You do not have enough money to retrieve this gravestone. Cost: " + cost);
                 return 0;
             }
 
@@ -147,7 +148,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             } catch (IllegalArgumentException e) { }
 
             if (price != cost) {
-                player.sendMessage("The price you entered is incorrect. Please try again.");
+                Message.sendMessage(player,"The price you entered is incorrect. Please try again.");
                 return 0;
             }
 
