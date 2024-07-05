@@ -83,7 +83,7 @@ val versionString: String =  if (System.getenv("CHANNEL") == "Release") {
 }
 
 tasks.named<ProcessResources>("processResources") {
-    filesMatching("plugin.yml") {
+    filesMatching("paper-plugin.yml") {
         expand("projectVersion" to versionString)
     }
 }
