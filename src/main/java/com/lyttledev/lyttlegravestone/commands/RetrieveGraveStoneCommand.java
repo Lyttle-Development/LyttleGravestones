@@ -104,7 +104,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             Player graveOwnerPlayer = Bukkit.getPlayer(UUID.fromString(graveOwnerString));
 
             // Permission logic
-            if (player != graveOwnerPlayer && !player.hasPermission("MapleGrave.Staff")) {
+            if (player != graveOwnerPlayer && !player.hasPermission("lyttlegravestone.staff")) {
                 Message.sendMessage(player, "You do not have permission to retrieve this gravestone.");
                 return 0;
             }
