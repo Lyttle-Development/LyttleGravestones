@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.*;
 
 public class GravestoneDatabase {
-
     private static Connection connection;
 
     public GravestoneDatabase(LyttleGravestone plugin) throws SQLException {
@@ -27,7 +26,6 @@ public class GravestoneDatabase {
                         inventoryContents TEXT);
                     """);
         }
-
     }
 
     public static void addGravestone(Location location, Player player, ItemStack[] gravestoneInventory) throws SQLException {
@@ -45,7 +43,6 @@ public class GravestoneDatabase {
             preparedStatement.setString(4, inventory);
             preparedStatement.executeUpdate();
         }
-
     }
 
     public static void updateGravestone(ItemStack[] gravestoneInventory, Location location) throws SQLException {
@@ -60,7 +57,6 @@ public class GravestoneDatabase {
             preparedStatement.setString(2, locationString);
             preparedStatement.executeUpdate();
         }
-
     }
 
     public static String[] getGravestone(Location location) throws SQLException {
