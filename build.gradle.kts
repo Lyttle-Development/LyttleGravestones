@@ -35,7 +35,7 @@ dependencies {
 group = "com.lyttledev"
 version = (property("pluginVersion") as String)
 description = "LyttleGravestone"
-java.sourceCompatibility = JavaVersion.VERSION_21
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 publishing {
     publications.create<MavenPublication>("maven") {
