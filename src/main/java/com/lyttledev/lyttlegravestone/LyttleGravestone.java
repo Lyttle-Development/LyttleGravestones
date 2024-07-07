@@ -5,7 +5,6 @@ import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import com.lyttledev.lyttlegravestone.listeners.*;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;

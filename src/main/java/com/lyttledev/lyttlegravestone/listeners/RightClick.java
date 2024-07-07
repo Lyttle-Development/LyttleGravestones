@@ -21,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import static com.lyttledev.lyttlegravestone.utils.DisplayName.getDisplayName;
+
 public class RightClick implements Listener {
 
     public RightClick(LyttleGravestone plugin) {
@@ -52,8 +54,9 @@ public class RightClick implements Listener {
             String graveOwnerName = graveOwnerPlayer != null ? graveOwnerPlayer.getName() : offlinePlayer.getName();
 
             // Permission logic
-            if (player != graveOwnerPlayer && !player.hasPermission("MapleGrave.Staff")) {
-                Message.sendMessageRaw(player, "This is the resting place of " + graveOwnerName + ", and you do not have permission to access it!\nMessage a staff member if you like it to be removed.");
+            if (player != graveOwnerPlayer && !player.hasPermission("lyttlegravestone.Staff")) {
+                String[][] replacements = {{"<PLAYER>", getDisplayName(player)}};
+                Message.sendMessage(player, "wrong_player", replacements);
                 return;
             }
 

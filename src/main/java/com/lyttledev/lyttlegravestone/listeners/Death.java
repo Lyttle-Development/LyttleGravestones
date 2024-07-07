@@ -60,6 +60,7 @@ public class Death implements Listener {
             GravestoneDatabase.addGravestone(location, player, gravestoneInventory);
             Memory.addGravestone(location);
 
+            // TODO, put this thing in a config file
             Component message = Component.text()
                 .append(Component.text("You died! You can retrieve your gravestone at ", NamedTextColor.GRAY))
                 .append(Component.text("X: "+location.getBlockX() + ", Y: " + location.getBlockY() + ", Z: " + location.getBlockZ() + ".", NamedTextColor.DARK_GRAY))

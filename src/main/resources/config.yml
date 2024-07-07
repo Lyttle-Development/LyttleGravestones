@@ -1,1 +1,11 @@
 prefix: <dark_aqua><bold>Lyttle<aqua><bold>Gravestone<reset> <dark_gray>- <gray>
+no_permission: <red>You do not have permission to do that!
+player_not_found: <dark_red>Player not found
+must_be_player: <red>You must be a player to use this command!
+message_not_found: <red>Oh... I can''t react to that. (Contact the Administrators)
+
+# Grave messages
+wrong_player: This is the resting place of <PLAYER>, and you do not have permission to access it!\nMessage a staff member if you like it to be removed.
+retrieve_price_changed: The price you entered is incorrect. Please try again.
+no_gravestone_found: No gravestone found at <COORDINATES>
+not_enough_money: 'You do not have enough money to retrieve this gravestone. Cost:  <COST>'
