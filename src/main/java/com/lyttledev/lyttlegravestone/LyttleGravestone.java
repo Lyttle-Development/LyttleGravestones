@@ -3,6 +3,8 @@ package com.lyttledev.lyttlegravestone;
 import com.lyttledev.lyttlegravestone.commands.RetrieveGraveStoneCommand;
 import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.listeners.*;
+import com.lyttledev.lyttlegravestone.types.Configs;
+import com.lyttledev.lyttlegravestone.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import io.papermc.paper.command.brigadier.Commands;
@@ -13,16 +15,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public final class LyttleGravestone extends JavaPlugin {
     private GravestoneDatabase gravestoneDatabase;
     private Economy economy;
+    public Configs config;
 
     @Override
     public void onEnable() {
-        // Create the default config if it doesn't exist
-        this.saveDefaultConfig();
+        saveDefaultConfig();
+        // Setup config after creating the configs
+        config = new Configs(this);
+        // Migrate config
+        migrateConfig();
 
         // Setup Vault
         if (!setupEconomy()) {
@@ -30,6 +37,9 @@ public final class LyttleGravestone extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        // Plugin startup logic
+        Message.init(this);
 
         // Register the listeners
         new Death(this);
@@ -92,5 +102,45 @@ public final class LyttleGravestone extends JavaPlugin {
 
     public Economy getEconomy() {
         return economy;
+    }
+
+    @Override
+    public void saveDefaultConfig() {
+        String configPath = "config.yml";
+        if (!new File(getDataFolder(), configPath).exists())
+            saveResource(configPath, false);
+
+        String messagesPath = "messages.yml";
+        if (!new File(getDataFolder(), messagesPath).exists())
+            saveResource(messagesPath, false);
+
+        // Defaults:
+        String defaultPath = "#defaults/";
+        String defaultGeneralPath =  defaultPath + configPath;
+        saveResource(defaultGeneralPath, true);
+
+        String defaultMessagesPath =  defaultPath + messagesPath;
+        saveResource(defaultMessagesPath, true);
+    }
+
+    private void migrateConfig() {
+        if (!config.general.contains("config_version")) {
+            config.general.set("config_version", 0);
+        }
+
+        switch (config.general.get("config_version").toString()) {
+//            case "0":
+//                // Migrate config entries.
+//                config.messages.set("prefix", config.defaultMessages.get("prefix"));
+//
+//                // Update config version.
+//                config.general.set("config_version", 1);
+//
+//                // Recheck if the config is fully migrated.
+//                migrateConfig();
+//                break;
+            default:
+                break;
+        }
     }
 }

@@ -1,0 +1,14 @@
+name: LyttleGravestone
+version: '${projectVersion}'
+main: com.lyttledev.lyttlegravestone.LyttleGravestone
+api-version: '1.20'
+authors:
+  - ThatsATim
+  - Stualyttle
+
+dependencies:
+  server:
+    Vault:
+      load: BEFORE
+      required: true
+      join-classpath: true

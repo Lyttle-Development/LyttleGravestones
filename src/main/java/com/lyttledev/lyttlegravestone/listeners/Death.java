@@ -4,6 +4,7 @@ import com.lyttledev.lyttlegravestone.LyttleGravestone;
 import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.utils.LocationChecker;
 import com.lyttledev.lyttlegravestone.utils.Memory;
+import com.lyttledev.lyttlegravestone.utils.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -59,19 +60,21 @@ public class Death implements Listener {
         try {
             GravestoneDatabase.addGravestone(location, player, gravestoneInventory);
             Memory.addGravestone(location);
+            String world = location.getWorld().getName();
+            int x = location.getBlockX();
+            int y = location.getBlockY();
+            int z = location.getBlockZ();
 
-            // TODO, put this thing in a config file
-            Component message = Component.text()
-                .append(Component.text("You died! You can retrieve your gravestone at ", NamedTextColor.GRAY))
-                .append(Component.text("X: "+location.getBlockX() + ", Y: " + location.getBlockY() + ", Z: " + location.getBlockZ() + ".", NamedTextColor.DARK_GRAY))
-                .append(Component.newline())
-                .append(Component.text("Or you can pay to get it delivered, by clicking ", NamedTextColor.GRAY))
-                .append(Component.text("here", NamedTextColor.GREEN)
-                    .clickEvent(ClickEvent.runCommand("/retrieve-gravestone " + location.getWorld().getName() + " " + location.getBlockX() + " " + location.getBlockY() + " " + location.getBlockZ())))
-                .append(Component.text("!", NamedTextColor.GRAY))
-                .build();
+            String[][] replacements = {
+                {"<WORLD>", world},
+                {"<X>", String.valueOf(x)},
+                {"<Y>", String.valueOf(y)},
+                {"<Z>", String.valueOf(z)},
+                {"<COMMAND>", "/retrieve-gravestone " + world + " " + x + " " + y + " " + z}
+            };
 
-            player.sendMessage(message);
+            Message.sendMessage(player, "death_message", replacements);
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             System.out.println("Failed to create the database entry! " + exception.getMessage());
