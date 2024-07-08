@@ -12,17 +12,20 @@ import javax.annotation.Nullable;
 
 public class Message {
     public static LyttleGravestone plugin;
-    static FileConfiguration config = plugin.getConfig();
+
+    public static void init(LyttleGravestone plugin) {
+        Message.plugin = plugin;
+    }
 
     private static String _getPrefix() {
         return _getConfigMessage("prefix");
     }
 
     private static String _getConfigMessage(String messageKey) {
-        @Nullable String message = config.getString(messageKey);
+        @Nullable String message = (String) plugin.config.messages.get(messageKey);
         if (message == null) {
             Console.log("Message key " + messageKey + " not found in messages.yml");
-            message = config.getString("message_not_found");
+            message = (String) plugin.config.messages.get("message_not_found");
         }
 
         if (message == null) {

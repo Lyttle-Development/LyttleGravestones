@@ -25,6 +25,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -95,7 +96,8 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             }
 
             if (values == null) {
-                Message.sendMessage(player, "No gravestone found at " + x + " " + y + " " + z);
+                String[][] replacements = {{"<COORDINATES>", x + " " + y + " " + z}};
+                Message.sendMessage(player, "no_gravestone_found", replacements);
                 return 0;
             }
 
@@ -105,7 +107,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
 
             // Permission logic
             if (player != graveOwnerPlayer && !player.hasPermission("lyttlegravestone.staff")) {
-                Message.sendMessage(player, "You do not have permission to retrieve this gravestone.");
+                Message.sendMessage(player, "no_permission");
                 return 0;
             }
 
@@ -120,24 +122,20 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
 
             // Check if the player has enough money
             if (economy != null && economy.getBalance(player) < cost || economy == null) {
-                Message.sendMessage(player, "You do not have enough money to retrieve this gravestone. Cost: " + cost);
+                String[][] replacements = {{"<PRICE>", String.valueOf(cost)}};
+                Message.sendMessage(player, "not_enough_money", replacements);
                 return 0;
             }
 
             // Check if the player has confirmed the retrieval
+            // TODO, put this thing in a config
             if (!confirm) {
-                Component message = Component.text()
-                    .append(Component.text("Retrieving the gravestone will cost you ", NamedTextColor.GRAY))
-                    .append(Component.text(cost, NamedTextColor.DARK_GRAY, TextDecoration.BOLD))
-                    .append(Component.text(" tokens. ", NamedTextColor.GRAY))
-                    .append(Component.newline())
-                    .append(Component.text("Click ", NamedTextColor.GRAY))
-                    .append(Component.text("here", NamedTextColor.GREEN)
-                        .clickEvent(ClickEvent.runCommand("/retrieve-gravestone " + world + " " + x + " " + y + " " + z + " confirm " + cost)))
-                    .append(Component.text(" to CONFIRM the retrieve of your items.", NamedTextColor.GRAY))
-                    .build();
+                String[][] replacements = {
+                        {"<PRICE>", String.valueOf(cost)},
+                        {"<COMMAND>", "/retrieve-gravestone " + world + " " + x + " " + y + " " + z + " confirm " + cost}
+                };
 
-                player.sendMessage(message);
+                Message.sendMessage(player, "retrieve_confirm", replacements);
                 return 0;
             }
 
@@ -148,7 +146,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             } catch (IllegalArgumentException e) { }
 
             if (price != cost) {
-                Message.sendMessage(player,"The price you entered is incorrect. Please try again.");
+                Message.sendMessage(player,"retrieve_price_changed");
                 return 0;
             }
 
