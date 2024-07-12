@@ -12,3 +12,7 @@ dependencies:
       load: BEFORE
       required: true
       join-classpath: true
+
+    LyttleScoreboardEconomy:
+      load: BEFORE
+      required: false
