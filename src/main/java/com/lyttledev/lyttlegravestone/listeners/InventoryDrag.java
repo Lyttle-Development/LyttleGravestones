@@ -1,6 +1,7 @@
 package com.lyttledev.lyttlegravestone.listeners;
 
 import com.lyttledev.lyttlegravestone.LyttleGravestone;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -16,22 +17,19 @@ public class InventoryDrag implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-
-        if (!event.getView().getTitle().contains("'s gravestone")) { return; }
+        String title = event.getView().title().toString();
+        if (!title.contains("'s gravestone")) { return; }
 
         ItemStack draggedItem = event.getOldCursor();
-
         if (draggedItem.getType() == Material.AIR) { return; }
 
         int inventorySize = event.getInventory().getSize();
-
         for (int slot : event.getRawSlots()) {
             if (slot < inventorySize) {
                 event.setCancelled(true);
                 break;
             }
         }
-
     }
 
 }

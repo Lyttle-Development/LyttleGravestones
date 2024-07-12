@@ -5,8 +5,6 @@ import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.utils.LocationChecker;
 import com.lyttledev.lyttlegravestone.utils.Memory;
 import com.lyttledev.lyttlegravestone.utils.Message;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,7 +19,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
-import net.kyori.adventure.text.event.ClickEvent;
 
 import java.sql.SQLException;
 
