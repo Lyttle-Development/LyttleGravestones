@@ -31,11 +31,15 @@ public final class LyttleGravestone extends JavaPlugin {
         // Migrate config
         migrateConfig();
 
-        // Setup Vault
-        if (!setupEconomy()) {
-            getLogger().severe("Vault or an economy plugin is not installed!");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
+        // Vault logic
+        Boolean command = (Boolean) config.general.get("retrieve_command_active");
+        Boolean vault = (Boolean) config.general.get("use_vault");
+        if (command && vault) {
+            if (!setupEconomy()) {
+                getLogger().severe("Vault or an economy plugin is not installed!");
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
         }
 
         // Plugin startup logic
@@ -128,6 +132,7 @@ public final class LyttleGravestone extends JavaPlugin {
             config.general.set("config_version", 0);
         }
 
+        // TODO Do this thing down here
         switch (config.general.get("config_version").toString()) {
 //            case "0":
 //                // Migrate config entries.
