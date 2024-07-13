@@ -87,7 +87,10 @@ public final class LyttleGravestone extends JavaPlugin {
     }
 
     public void registerCommands(Commands commands) {
-        RetrieveGraveStoneCommand.register(this, commands);
+        Boolean command = (Boolean) config.general.get("retrieve_command_active");
+        if (command) {
+            RetrieveGraveStoneCommand.register(this, commands);
+        }
     }
 
     private boolean setupEconomy() {
