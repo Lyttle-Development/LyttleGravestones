@@ -137,16 +137,28 @@ public final class LyttleGravestone extends JavaPlugin {
 
         // TODO Do this thing down here
         switch (config.general.get("config_version").toString()) {
-//            case "0":
-//                // Migrate config entries.
-//                config.messages.set("prefix", config.defaultMessages.get("prefix"));
-//
-//                // Update config version.
-//                config.general.set("config_version", 1);
-//
-//                // Recheck if the config is fully migrated.
-//                migrateConfig();
-//                break;
+            case "0":
+                // Migrate config entries.
+                config.messages.set("prefix", config.defaultMessages.get("prefix"));
+                config.messages.set("no_permission", config.defaultMessages.get("no_permission"));
+                config.messages.set("player_not_found", config.defaultMessages.get("player_not_found"));
+                config.messages.set("must_be_player", config.defaultMessages.get("must_be_player"));
+                config.messages.set("message_not_found", config.defaultMessages.get("message_not_found"));
+                config.messages.set("wrong_player", config.defaultMessages.get("wrong_player"));
+                config.messages.set("retrieve_price_changed", config.defaultMessages.get("retrieve_price_changed"));
+                config.messages.set("no_gravestone_found", config.defaultMessages.get("no_gravestone_found"));
+                config.messages.set("not_enough_money", config.defaultMessages.get("not_enough_money"));
+                config.messages.set("death_message", config.defaultMessages.get("death_message"));
+                config.messages.set("retrieve_confirm", config.defaultMessages.get("retrieve_confirm"));
+                config.general.set("retrieve_command_active", config.defaultGeneral.get("retrieve_command_active"));
+                config.general.set("use_vault", config.defaultGeneral.get("use_vault"));
+
+                // Update config version.
+                config.general.set("config_version", 1);
+
+                // Recheck if the config is fully migrated.
+                migrateConfig();
+                break;
             default:
                 break;
         }
