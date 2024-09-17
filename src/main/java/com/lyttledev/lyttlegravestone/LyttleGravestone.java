@@ -4,6 +4,7 @@ import com.lyttledev.lyttlegravestone.commands.RetrieveGraveStoneCommand;
 import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.listeners.*;
 import com.lyttledev.lyttlegravestone.types.Configs;
+import com.lyttledev.lyttlegravestone.utils.Console;
 import com.lyttledev.lyttlegravestone.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -44,6 +45,7 @@ public final class LyttleGravestone extends JavaPlugin {
 
         // Plugin startup logic
         Message.init(this);
+        Console.init(this);
 
         // Register the listeners
         new Death(this);
