@@ -6,9 +6,4 @@ authors:
   - ThatsATim
   - Stualyttle
 
-dependencies:
-  server:
-    Vault:
-      load: BEFORE
-      required: true
-      join-classpath: true
+depend: [Vault, LyttleScoreboardEconomy]
