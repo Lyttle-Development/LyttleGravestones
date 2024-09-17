@@ -1,1 +1,10 @@
-config_version: 0
+# Toggle the /retrievegravestone or /rt command
+# Default = true
+retrieve_command_active: true
+
+# Only applies if retrieve-command-active is set to true
+# Toggle for the usage vault, meaning you can switch of the use of a currency within this plugin.
+# Default = true
+use_vault: true
+
+config_version: 1
