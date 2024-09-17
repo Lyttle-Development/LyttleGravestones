@@ -12,10 +12,6 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.entity.Creeper;
@@ -25,7 +21,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -143,7 +138,7 @@ public class RetrieveGraveStoneCommand implements Command<CommandSourceStack> {
             try {
                 String priceArg = context.getArgument("price", String.class);
                 price = Integer.parseInt(priceArg);
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException ignored) {}
 
             if (price != cost) {
                 Message.sendMessage(player,"retrieve_price_changed");
