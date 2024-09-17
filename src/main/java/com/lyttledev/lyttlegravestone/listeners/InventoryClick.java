@@ -17,8 +17,8 @@ public class InventoryClick implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        String title = event.getView().title().toString();
-        if (!title.contains("'s gravestone")) { return; }
+
+        if (!event.getView().getTitle().contains("'s gravestone")) { return; }
 
         Inventory clickedInventory = event.getClickedInventory();
         Inventory playerInventory = event.getWhoClicked().getInventory();
@@ -28,6 +28,7 @@ public class InventoryClick implements Listener {
                 event.setCancelled(true);
             }
         }
+
 
         if (playerInventory != clickedInventory) {
             ItemStack cursorItem = event.getCursor();

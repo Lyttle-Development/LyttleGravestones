@@ -11,7 +11,6 @@ public class Configs {
 
     // Default configs
     public Config defaultMessages;
-    public Config defaultGeneral;
 
 
     public Configs(LyttleGravestone plugin) {
@@ -23,7 +22,6 @@ public class Configs {
 
         // Default configs
         defaultMessages = new Config(plugin, "#defaults/messages.yml");
-        defaultGeneral = new Config(plugin, "#defaults/config.yml");
     }
 
     public void reload() {
