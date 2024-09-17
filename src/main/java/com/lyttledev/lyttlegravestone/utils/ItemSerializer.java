@@ -1,8 +1,7 @@
 package com.lyttledev.lyttlegravestone.utils;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Base64;
@@ -43,7 +42,7 @@ public class ItemSerializer {
 
         } catch (Exception exception) {
             if (tries > 10) {
-                Bukkit.getConsoleSender().sendMessage(Component.text("GRAVESTONE: ERROR WHILE DE-SERIALISING INVENTORY!").color(NamedTextColor.RED));
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "GRAVESTONE: ERROR WHILE DE-SERIALISING INVENTORY!");
                 return new ItemStack[0];
             }
             deserializeInventory(serializedInventory, tries + 1);

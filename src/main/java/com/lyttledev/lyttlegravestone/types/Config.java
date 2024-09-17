@@ -15,7 +15,7 @@ public class Config {
     private final String pluginFolderPath;
     private final String configPath;
     private YamlConfiguration config = null;
-    private final LyttleGravestone plugin;
+    private LyttleGravestone plugin;
 
     public Config(LyttleGravestone plugin, String configPath) {
         this.pluginFolderPath = plugin.getDataFolder().getPath();
@@ -126,7 +126,7 @@ public class Config {
         YamlConfiguration cfg = this.getConfig();
         // Check if it contains it, but check with all to lower case.
         for (String key : cfg.getKeys(false)) {
-            if (key.equalsIgnoreCase(path)) {
+            if (key.toLowerCase().equals(path.toLowerCase())) {
                 return true;
             }
         }

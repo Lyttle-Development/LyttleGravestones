@@ -22,8 +22,12 @@ public class GuiClose implements Listener {
 
     @EventHandler
     public void onGuiClose(InventoryCloseEvent event) {
-        String title = event.getView().title().toString();
-        if (!title.contains("'s gravestone")) { return; }
+
+        String containerTitle = event.getView().getTitle();
+
+        if (!containerTitle.contains("'s gravestone")) {
+            return;
+        }
 
         ItemStack[] gravestoneInventory = event.getInventory().getContents();
 

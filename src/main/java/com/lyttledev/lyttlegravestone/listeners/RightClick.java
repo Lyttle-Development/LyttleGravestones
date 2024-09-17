@@ -5,7 +5,6 @@ import com.lyttledev.lyttlegravestone.database.GravestoneDatabase;
 import com.lyttledev.lyttlegravestone.utils.ItemSerializer;
 import com.lyttledev.lyttlegravestone.utils.Memory;
 import com.lyttledev.lyttlegravestone.utils.Message;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -78,7 +77,7 @@ public class RightClick implements Listener {
     }
 
     private void openGui(Player player, ItemStack[] items, String graveOwnerName) {
-        Inventory gravestoneInventory = Bukkit.createInventory(player, 54, Component.text(graveOwnerName + "'s gravestone"));
+        Inventory gravestoneInventory = Bukkit.createInventory(player, 54, graveOwnerName + "'s gravestone");
         gravestoneInventory.setContents(items);
         player.openInventory(gravestoneInventory);
     }
