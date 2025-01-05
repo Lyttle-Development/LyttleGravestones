@@ -57,6 +57,7 @@ public class Death implements Listener {
         ItemStack[] gravestoneInventory = setLayout(playerInventory, cursorItem);
         player.setItemOnCursor(null);
         event.getDrops().clear();
+        playerInventory.clear();
 
         // Check if the location is safe!
         Location playerLocation = player.getLocation();
