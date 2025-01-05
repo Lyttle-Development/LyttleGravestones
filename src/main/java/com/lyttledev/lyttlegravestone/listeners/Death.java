@@ -11,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,18 +33,34 @@ public class Death implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
 
-        // Get all Items of the player and prevent normal drops
+        // Get all Items of the player
         Player player = event.getPlayer();
         PlayerInventory playerInventory = player.getInventory();
         if (playerInventory.isEmpty()) { return; }
         ItemStack cursorItem = player.getItemOnCursor();
+
+        // Check for curse of vanishing
+        for (ItemStack item : playerInventory) {
+            if (item == null) {
+                continue;
+            }
+            if (item.containsEnchantment(Enchantment.VANISHING_CURSE)) {
+                item.setAmount(0);
+            }
+        }
+
+        if (cursorItem.containsEnchantment(Enchantment.VANISHING_CURSE)) {
+            player.setItemOnCursor(null);
+        }
+
+        // Set the correct inventory layout and prevent normal death drops
         ItemStack[] gravestoneInventory = setLayout(playerInventory, cursorItem);
         player.setItemOnCursor(null);
         event.getDrops().clear();
         playerInventory.clear();
-        Location playerLocation = player.getLocation();
 
         // Check if the location is safe!
+        Location playerLocation = player.getLocation();
         LocationChecker.getSafe(playerLocation);
 
         // Spawn the tombstone
